@@ -10,7 +10,7 @@ on:
   workflow_dispatch:  # Runs when the workflow is manually triggered
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner for Linux
     steps:
       - name: Checkout code
@@ -21,6 +21,24 @@ jobs:
 
       - name: Build with g++
         run: g++ -o a.out main.cpp
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: a-out
+          path: a.out  # Upload the a.out file as an artifact
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+      - uses: actions/download-artifact@v4
+        with:
+          name: a-out
 
       - name: Make the test script executable
         run: chmod +x test.sh
