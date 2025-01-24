@@ -1,4 +1,4 @@
-name: Build
+name: Build and Test
 
 on:
   push:
@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner for Linux
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,3 +21,16 @@ jobs:
 
       - name: Build with g++
         run: g++ -o a.out main.cpp
+
+  test: 
+    needs: build  # Ensure the build job runs before the test job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Make the test script executable
+        run: chmod +x test.sh
+
+      - name: Run tests
+        run: ./test.sh
