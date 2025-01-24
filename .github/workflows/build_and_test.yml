@@ -3,10 +3,10 @@ name: Build and Test
 on:
   push:
     branches:
-      - *  # Runs when a push is made to any branch
+      - '**' # Runs when a push is made to any branch
   pull_request:
     branches:
-      - *  # Runs when a pull request is made to any branch
+      - '**' # Runs when a pull request is made to any branch
   workflow_dispatch:  # Runs when the workflow is manually triggered
 
 jobs:
