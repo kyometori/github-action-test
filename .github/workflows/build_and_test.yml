@@ -40,6 +40,9 @@ jobs:
         with:
           name: a-out
 
+      - name: Make the a.out file executable
+        run: chmod +x a.out
+
       - name: Make the test script executable
         run: chmod +x test.sh
 
