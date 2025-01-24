@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main  # Runs when code is pushed to the main branch
+  pull_request:
+    branches:
+      - main  # Runs when a pull request targets the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for Linux
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up GCC
+        run: sudo apt-get install g++ -y  # Install GCC on the runner
+
+      - name: Build with g++
+        run: g++ -o a.out main.cpp
