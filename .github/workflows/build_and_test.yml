@@ -10,7 +10,7 @@ on:
   workflow_dispatch:  # Runs when the workflow is manually triggered
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner for Linux
     steps:
       - name: Checkout code
@@ -22,13 +22,6 @@ jobs:
       - name: Build with g++
         run: g++ -o a.out main.cpp
 
-  test: 
-    needs: build  # Ensure the build job runs before the test job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
       - name: Make the test script executable
         run: chmod +x test.sh
 
